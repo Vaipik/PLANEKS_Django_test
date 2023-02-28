@@ -48,7 +48,7 @@ class SignInForm(AuthenticationForm):
         label="Enter username",
         widget=forms.TextInput(attrs={
             "class": "form-control mt-3",
-            "placeholder": "username",  # required to prettify view of modal form
+            "placeholder": "username",  # required to prettify view of form
         })
     )
     password = forms.CharField(
@@ -57,6 +57,6 @@ class SignInForm(AuthenticationForm):
         label="Enter password",
         widget=forms.PasswordInput(attrs={
             "class": "form-control mt-3",
-            "placeholder": "password",  # required to prettify view of modal form
+            "placeholder": "password",  # required to prettify view of form
         })
     )
