@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "planeks-django-test"
+version = "0.1.0"
+description = "schemas for generating fake data"
+authors = ["Vaipik <n.khylko@gmail.com>"]
+readme = "README.md"
+packages = [{include = "planeks_django_test"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+django = "^4.1.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
