@@ -27,7 +27,6 @@ class SignUpForm(UserCreationForm):
         })
     )
     password2 = forms.CharField(
-        min_length=constants.PASSWORD_MIN_LENGTH,
         max_length=constants.PASSWORD_MAX_LENGTH,
         label="Repeat your password",
         widget=forms.PasswordInput(attrs={
@@ -52,7 +51,6 @@ class SignInForm(AuthenticationForm):
         })
     )
     password = forms.CharField(
-        min_length=constants.PASSWORD_MIN_LENGTH,
         max_length=constants.PASSWORD_MAX_LENGTH,
         label="Enter password",
         widget=forms.PasswordInput(attrs={
