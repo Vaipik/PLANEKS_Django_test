@@ -9,7 +9,13 @@ packages = [{include = "planeks_django_test"}]
 [tool.poetry.dependencies]
 python = "^3.9"
 django = "^4.1.7"
+faker = "^17.3.0"
+psycopg2 = "^2.9.5"
 
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+factory-boy = "^3.2.1"
 
 [build-system]
 requires = ["poetry-core"]
