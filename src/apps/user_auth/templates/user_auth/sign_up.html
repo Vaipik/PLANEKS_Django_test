@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form action="{% url 'user_auth:registration' %}" method="post">
+    <div class="row text-center">
+      <div class="col-sm-4 col-md-4 col-lg-4"></div>
+      <div class="col-sm-4 col-md-4 col-lg-4">
+        {% include 'user_auth/_form.html' %}
+      </div>
+      <div class="col-sm-4 col-md-4 col-lg-4"></div>
+    </div>
+    {% csrf_token %}
+  </form>
+{% endblock %}
