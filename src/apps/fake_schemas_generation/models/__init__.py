@@ -1,7 +1,7 @@
-from .row import Row
+from .record import Record
 from .schema import Schema
 
 __all__ = (
-    "Row", Row,
+    "Record", Record,
     "Schema", Schema,
 )
