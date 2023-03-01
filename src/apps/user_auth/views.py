@@ -31,7 +31,7 @@ class SignInView(View):
                     data={
                         "message": "Logged in",
                         "status": 200,
-                        "url": redirect("user_profile:profile").url
+                        "url": redirect("fake_schemas_generation:user_schemas").url
                     },
                     status=200
                 )
