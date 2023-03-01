@@ -18,7 +18,7 @@ class Schema(models.Model):
         editable=False,
     )
     name = models.CharField(
-        max_length=constants.SCHEMA_LENGTH_MAX_NAME,
+        max_length=constants.SCHEMA_NAME_MAX_LENGTH,
         verbose_name="Schema name"
     )
     slug = AutoSlugField(
@@ -32,7 +32,7 @@ class Schema(models.Model):
     user = models.ForeignKey(
         to=User,
         on_delete=models.CASCADE,
-        related_name="user"
+        related_name="schema"
     )
 
     class Meta:

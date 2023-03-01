@@ -28,7 +28,7 @@ class Row(models.Model):
     schema = models.ForeignKey(
         to="fake_schemas_generation.Schema",
         on_delete=models.CASCADE,
-        related_name="schema"
+        related_name="row"
     )
 
     class Meta:
