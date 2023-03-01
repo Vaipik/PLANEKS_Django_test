@@ -6,8 +6,9 @@ SCHEMA_URL_MAX_LENGTH = 32
 
 # Rows
 
-COLUMN_TYPE_LENGTH = 1  # row type is 1 letter for DB to make search easier
+COLUMN_TYPE_LENGTH = 2  # row type is 2 letter for DB to make search easier
 COLUMN_SEPARATOR_LENGTH = 1
 COLUMN_STRING_QUOTES_LENGTH = 1
 COLUMN_HEADER_MIN_LENGTH = 4
 COLUMN_HEADER_MAX_LENGTH = 64
+COLUMN_DEFAULT_STRING = "Choose data type"

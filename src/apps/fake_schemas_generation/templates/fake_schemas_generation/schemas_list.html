@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-2 col-md-2 col-lg-2"></div>
+
+    <div class="col-sm-8 col-md-8 col-lg-8">
+      <div class="row">
+          <h2 class="text-center"> {{ user.username }} schemas</h2>
+
+      </div>
+    </div>
+
+    <div class="col-sm-2 col-md-2 col-lg-2"></div>
+
+  </div>
+  <h3> {{ user.username }} schemas</h3>
+
+{% endblock %}

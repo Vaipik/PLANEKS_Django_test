@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-sm-4 col-md-4 col-lg-4">
+    <div class="form-floating">
+      {{ form.header }}
+      <label for="{{ form.header.label }}">{{ form.header.label }}</label>
+      {% for error in form.header.errors %}
+        <p class="mt-3 text-danger">{{ error }}</p>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="col-sm-2 col-md-2 col-lg-2">
+    <div class="form-floating">
+      {{ form.type }}
+      <label for="{{ form.type.label }}">{{ form.type.label }}</label>
+      {% for error in form.type.errors %}
+        <p class="mt-3 text-danger">{{ error }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if form.type.value == "i" %}
+    <div class="col-sm-1 col-md-1 col-lg-1">
+      <div class="form-floating">
+        <input type="number" name="integer start" class="form-control mt-3" placeholder="From" required min="0">
+        <label for="From">From</label>
+      </div>
+    </div>
+    <div class="col-sm-1 col-md-1 col-lg-1">
+      <div class="form-floating">
+        <input type="number" name="integer end" class="form-control mt-3" placeholder="To" required min="0">
+        <label for="To">To</label>
+      </div>
+    </div>
+  {% elif form.type.value == "t" %}
+    <div class="col-sm-2 col-md-2 col-lg-2">
+
+      <div class="form-floating">
+        <input type="number" name="text sentences" class="form-control mt-3" placeholder="Amount of sentences" required min="0">
+        <label for="Amount of sentences">Amount of sentences</label>
+      </div>
+    </div>
+  {% else %}
+    {{ form.type.value }}
+    <div class="col-sm-2 col-md-2 col-lg-2"></div>
+  {% endif %}
+  <div class="col-sm-2 col-md-2 col-lg-2">
+    <div class="form-floating">
+      {{ form.order }}
+      <label for="{{ form.order.label }}">{{ form.order.label }}</label>
+      {% for error in form.order.errors %}
+        <p class="mt-3 text-danger">{{ error }}</p>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="col-sm-2 col-md-2 col-lg-2">
+    <button class="btn btn-outline-danger text-dark mt-4" name="button" value="{{ forloop.counter0 }}">
+      Delete column
+    </button>
+  </div>
+  <div class="row mt-3 text-end">
+    <div class="col-sm-10 col-md-10 col-lg-10"></div>
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      {% if forloop.last %}
+        <button class="btn btn-outline-success text-dark mt-4" name="button" value="add">Add column</button>
+      {% endif %}
+    </div>
+  </div>
+  </div>

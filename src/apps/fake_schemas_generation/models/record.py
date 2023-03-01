@@ -20,7 +20,8 @@ class Record(models.Model):
     type = models.CharField(
         max_length=constants.COLUMN_TYPE_LENGTH,
         choices=RECORD_DATA_TYPES,
-        verbose_name="Record data type"
+        verbose_name="Record data type",
+        default=""
     )
     data = models.TextField(
         verbose_name="Record data"
