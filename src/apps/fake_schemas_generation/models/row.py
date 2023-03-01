@@ -7,11 +7,15 @@ from ..libs import constants
 
 
 class Row(models.Model):
-    """"""
+    """DB Table for storing row data. Row header, row data type, row data"""
     id = models.UUIDField(
         default=uuid4,
         primary_key=True,
         editable=False
+    )
+    header = models.CharField(
+        max_length=constants.ROW_HEADER_MAX_LENGTH,
+        verbose_name="Row header"
     )
     type = models.CharField(
         max_length=constants.ROW_TYPE_LENGTH,
@@ -32,7 +36,7 @@ class Row(models.Model):
         ordering = ["schema", "type"]
         verbose_name = "Row data"
         verbose_name_plural = "Rows data"
+        unique_together = ["header", "schema"]
 
     def __str__(self) -> str:
-        return f"{self.schema} | {self.get_type_display()} | {self.data[:30]}"
-
+        return f"{self.schema} | {self.header} | {self.get_type_display()} | {self.data[:30]}"

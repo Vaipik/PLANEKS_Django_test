@@ -1,5 +1,6 @@
 from uuid import uuid4
 
+from autoslug import AutoSlugField
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -19,6 +20,11 @@ class Schema(models.Model):
     name = models.CharField(
         max_length=constants.SCHEMA_LENGTH_MAX_NAME,
         verbose_name="Schema name"
+    )
+    slug = AutoSlugField(
+        max_length=constants.SCHEMA_URL_MAX_LENGTH,
+        populate_from="name",
+        unique_with="user"
     )
     rows_quantiy = models.PositiveIntegerField(
         verbose_name="Rows quantity"

@@ -1,8 +1,11 @@
 # Schema
 
-SCHEMA_LENGTH_MIN_NAME = 4  # test
-SCHEMA_LENGTH_MAX_NAME = 128
+SCHEMA_NAME_MIN_LENGTH = 4  # test
+SCHEMA_NAME_MAX_LENGTH = 128
+SCHEMA_URL_MAX_LENGTH = 32
 
 # Rows
 
-ROW_TYPE_LENGTH = 1  # row type is 1 letter for DB
+ROW_TYPE_LENGTH = 1  # row type is 1 letter for DB to make search easier
+ROW_HEADER_MIN_LENGTH = 4
+ROW_HEADER_MAX_LENGTH = 64
