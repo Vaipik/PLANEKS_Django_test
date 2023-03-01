@@ -10,7 +10,7 @@ class ColumnForm(forms.ModelForm):
 
     class Meta:
         model = Record
-        fields = ["header", "type", "order"]
+        fields = ["header", "type", "order", "start_integer", "end_integer", "sentences"]
         widgets = {
             "header": forms.TextInput(attrs={
                 "class": "form-control mt-3",
@@ -26,12 +26,30 @@ class ColumnForm(forms.ModelForm):
                 "class": "form-control mt-3",
                 "placeholder": "Order №",
                 "required": True,
-            })
+            }),
+            "start_integer": forms.NumberInput(attrs={
+                "class": "form-control mt-3",
+                "placeholder": "From",
+                "required": True,
+            }),
+            "end_integer": forms.NumberInput(attrs={
+                "class": "form-control mt-3",
+                "placeholder": "To",
+                "required": True,
+            }),
+            "sentences": forms.NumberInput(attrs={
+                "class": "form-control mt-3",
+                "placeholder": "Sentences quantity",
+                "required": True,
+            }),
         }
         labels = {
             "header": "Column header",
             "type": "Column data type",
-            "order": "Order №"
+            "order": "Order №",
+            "start_integer": "From",
+            "end_integer": "To",
+            "sentences": "Sentences quantity",
         }
 
     def clean_header(self):

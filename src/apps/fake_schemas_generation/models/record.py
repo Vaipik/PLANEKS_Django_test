@@ -17,14 +17,14 @@ class Record(models.Model):
         max_length=constants.COLUMN_HEADER_MAX_LENGTH,
         verbose_name="Column header"
     )
+    start_integer = models.PositiveSmallIntegerField(null=True, default=None)
+    end_integer = models.PositiveSmallIntegerField(null=True, default=None)
+    sentences = models.PositiveSmallIntegerField(null=True, default=None)
     type = models.CharField(
         max_length=constants.COLUMN_TYPE_LENGTH,
         choices=RECORD_DATA_TYPES,
         verbose_name="Record data type",
         default=""
-    )
-    data = models.TextField(
-        verbose_name="Record data"
     )
     order = models.PositiveSmallIntegerField()
     schema = models.ForeignKey(

@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic, View
 
 from . import forms, models, services
@@ -19,7 +19,11 @@ class CreateUserSchema(LoginRequiredMixin, View):
         form = forms.CreatSchemaForm(form_data)
         button = form_data.get("button")
         if button == "submit":
-            pass
+            formset = forms.ColumnFormSet(form_data)
+            if form.is_valid() and formset.is_valid():
+                form.save()
+                formset.save()
+                return redirect("fake_schemas_generation:user_schemas_list")
 
         formset = services.get_updated_formset(
             form_data=form_data,

@@ -1,10 +1,13 @@
 from django.contrib.auth import get_user_model
 from django.db.models import QuerySet
-
 from ..models import Schema
 
 
 User = get_user_model()
+
+
+def create_schema(form_data):
+    pass
 
 
 def get_user_schemas(user: User) -> QuerySet[Schema]:

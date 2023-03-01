@@ -21,26 +21,33 @@
   {% if form.type.value == "i" %}
     <div class="col-sm-1 col-md-1 col-lg-1">
       <div class="form-floating">
-        <input type="number" name="integer start" class="form-control mt-3" placeholder="From" required min="0">
-        <label for="From">From</label>
+        {{ form.start_integer }}
+        <label for="{{ form.start_integer.label }}">{{ form.start_integer.label }}</label>
+        {% for error in form.start_integer.errors %}
+          <p class="mt-3 text-danger">{{ error }}</p>
+        {% endfor %}
       </div>
     </div>
     <div class="col-sm-1 col-md-1 col-lg-1">
       <div class="form-floating">
-        <input type="number" name="integer end" class="form-control mt-3" placeholder="To" required min="0">
-        <label for="To">To</label>
+        {{ form.end_integer }}
+        <label for="{{ form.end_integer.label }}">{{ form.end_integer.label }}</label>
+        {% for error in form.end_integer.errors %}
+          <p class="mt-3 text-danger">{{ error }}</p>
+        {% endfor %}
       </div>
     </div>
   {% elif form.type.value == "t" %}
     <div class="col-sm-2 col-md-2 col-lg-2">
-
       <div class="form-floating">
-        <input type="number" name="text sentences" class="form-control mt-3" placeholder="Amount of sentences" required min="0">
-        <label for="Amount of sentences">Amount of sentences</label>
+        {{ form.sentences }}
+        <label for="{{ form.sentences.label }}">{{ form.sentences.label }}</label>
+        {% for error in form.sentences.errors %}
+          <p class="mt-3 text-danger">{{ error }}</p>
+        {% endfor %}
       </div>
     </div>
   {% else %}
-    {{ form.type.value }}
     <div class="col-sm-2 col-md-2 col-lg-2"></div>
   {% endif %}
   <div class="col-sm-2 col-md-2 col-lg-2">
@@ -65,4 +72,4 @@
       {% endif %}
     </div>
   </div>
-  </div>
+</div>
