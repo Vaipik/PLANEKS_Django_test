@@ -6,6 +6,7 @@ def get_updated_formset(*, form_data: dict, formset, button_data: str):
     :param button_data: Determines what action must be applied
     :return: updated formset
     """
+    print("TUTA", button_data)
     if button_data == "add":
         return _add_new_column(form_data, formset)
 
@@ -16,10 +17,11 @@ def get_updated_formset(*, form_data: dict, formset, button_data: str):
 
 
 def _add_new_column(form_data, formset):
+    # column_formset = formset(form_data)
+    # if column_formset.is_valid():
+    print("TUTA")
+    form_data["record-TOTAL_FORMS"] = int(form_data["record-TOTAL_FORMS"]) + 1
     column_formset = formset(form_data)
-    if column_formset.is_valid():
-        form_data["record-TOTAL_FORMS"] = int(form_data["record-TOTAL_FORMS"]) + 1
-        column_formset = formset(form_data)
     return column_formset
 
 
