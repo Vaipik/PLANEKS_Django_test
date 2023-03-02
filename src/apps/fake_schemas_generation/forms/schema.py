@@ -2,11 +2,11 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 from ..libs import constants
-from ..models import Schema, Record
+from ..models import Schema, Column
 from .column import ColumnForm
 
 
-class CreatSchemaForm(forms.ModelForm):
+class SchemaForm(forms.ModelForm):
 
     class Meta:
         model = Schema
@@ -39,4 +39,4 @@ class CreatSchemaForm(forms.ModelForm):
         return title
 
 
-ColumnFormSet = forms.inlineformset_factory(Schema, Record, ColumnForm, extra=1)
+ColumnFormSet = forms.inlineformset_factory(Schema, Column, ColumnForm, extra=1)

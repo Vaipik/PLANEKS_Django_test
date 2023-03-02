@@ -1,9 +1,9 @@
 from .column import ColumnForm
-from .schema import CreatSchemaForm, ColumnFormSet
+from .schema import SchemaForm, ColumnFormSet
 
 
 __all__ = (
     "ColumnForm", ColumnForm,
     "ColumnFormSet", ColumnFormSet,
-    "CreatSchemaForm", CreatSchemaForm
+    "SchemaForm", SchemaForm
 )

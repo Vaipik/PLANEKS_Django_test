@@ -2,13 +2,13 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 from ..libs import constants
-from ..models import Record
+from ..models import Column
 
 
 class ColumnForm(forms.ModelForm):
 
     class Meta:
-        model = Record
+        model = Column
         fields = ["header", "type", "order", "start_integer", "end_integer", "sentences"]
         widgets = {
             "header": forms.TextInput(attrs={
