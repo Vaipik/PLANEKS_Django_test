@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <div class="row text-center">
+    <div class="col-sm-2 col-md-2 col-lg-2"></div>
+
+    <div class="col-sm-8 col-md-8 col-lg-8">
+      <h3 class="fw-light mt-4 mb-4">{{ schema.title }}</h3>
+      {% if messages %}
+        {% for message in messages %}
+          <p class="text-success">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+      <div class="row text-center">
+
+        <div class="col-sm-7 col-md-7 col-lg-7 text-center">
+          <h4 class="fw-light mb-4">Schema columns</h4>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col" class="fw-light">#</th>
+              <th scope="col" class="fw-light">Column header</th>
+              <th scope="col" class="fw-light">Column type</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for column in schema.column.all %}
+              <tr>
+                <td>
+                  {{ column.order }}
+                </td>
+
+                <td class="align-end">
+                  {{ column.header }}
+                </td>
+
+                <td>
+                  {{ column.get_type_display }}
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-5 col-md-5 col-lg-5">
+          <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-3"><h4 class="fw-light mb-4">Datasets</h4></div>
+
+            <div class="col-sm-9 col-md-9 col-lg-9">
+              <form method="post" action="{% url 'fake_schemas_generation:add_dataset' schema_url=schema.slug %}">
+                <div class="row">
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-floating">
+                      <input type="number" name="rows quantity" class="form-control" placeholder="Rows quantity"
+                             required
+                             min="0"
+                             id="rows quantity">
+                      <label for="rows quantity">Rows quantity</label>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success text-white">Add new</button>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+
+          </div>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col" class="fw-light">#</th>
+              <th scope="col" class="fw-light">Generated at</th>
+              <th scope="col" class="fw-light">Status</th>
+              <th scope="col" class="fw-light">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for dataset in page_obj %}
+              <tr>
+                <td>
+                  {{ forloop.counter }} {{ dataset.rows_quantity }}
+                </td>
+                <td class="align-end">
+                  {{ dataset.generated_at|date:"d E, Y" }}
+
+                </td>
+                <td>
+                  <div class="badge bg-success dataset{{ forloop.counter }} text-white  fw-light">
+                    {% if dataset.is_uploaded %}
+                      Generated
+                    {% else %}
+                      Not generated
+                    {% endif %}
+                  </div>
+                </td>
+                <td>
+                  <div class="row">
+                    {% if dataset.is_uploaded %}
+                      <div class="col-sm-6 col-md-6 col-l-6">
+                        <a href="{{ dataset.csv_file.url }}">Download</a>
+                      </div>
+                      <div class="col-sm-6 col-md-6 col-l-6">
+                        <a href="#">
+                          Delete
+                        </a>
+                      </div>
+                    {% else %}
+                      <div class="col-sm-3 col-md-3 col-lg-3"></div>
+                      <div class="col-sm-6 col-md-6 col-lg-6">
+                      <form action="{% url 'fake_schemas_generation:generate_csv' dataset_id=dataset.pk%}"
+                            id="generate_csv{{ forloop.counter }}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" id="button{{ forloop.counter }}">Generate</button>
+                      </form>
+                      </div>
+                      <div class="col-sm-3 col-md-3 col-lg-3"></div>
+                    {% endif %}
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-2 col-md-2 col-lg-2"></div>
+
+  </div>
+
+{% endblock %}
+
+{% block custom_js %}
+  <script src="{% static 'js/generating.js' %}"></script>
+{% endblock %}
+
+
+

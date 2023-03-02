@@ -2,14 +2,38 @@
 
 
 {% block content %}
-  <div class="row">
+  <div class="row text-center">
     <div class="col-sm-2 col-md-2 col-lg-2"></div>
 
     <div class="col-sm-8 col-md-8 col-lg-8">
-      <div class="row">
-          <h2 class="text-center"> {{ user.username }} schemas</h2>
+      <h3 class="fw-light mt-4 mb-4">This is all your schemas, {{ user.username }}</h3>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col" class="fw-light">#</th>
+          <th scope="col" class="fw-light">Schema</th>
+          <th scope="col" class="fw-light">Modified</th>
+          <th scope="col" class="fw-light">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for schema in schemas %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td class="align-end"><a href="{% url 'fake_schemas_generation:user_schema' schema_url=schema.slug %}" class="text-decoration-none text-dark fw-bolder">{{ schema.title }}</a>
+            </td>
+            <td>{{ schema.edited_at|date:"d E, Y H:i" }}</td>
+            <td>
+              <a href="{% url 'fake_schemas_generation:edit_user_schema' schema_url=schema.slug %}"
+                 class="btn btn-outline-success text-dark me-5"
+              >Edit schema</a>
+              <a href="#" class="btn btn-danger text-dark text-end">Delete schema</a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
 
-      </div>
     </div>
 
     <div class="col-sm-2 col-md-2 col-lg-2"></div>

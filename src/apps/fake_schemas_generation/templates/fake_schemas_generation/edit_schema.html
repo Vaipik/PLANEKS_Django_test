@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <form id="schema-form-container" action="{% url 'fake_schemas_generation:edit_user_schema' schema_url=schema_url %}"
+        method="post">
+    <div class="row text-center mt-3">
+      <h3 class="fw-lighter">Creating new schema</h3>
+      <div class="col-sm-2 col-md-2 col-lg-2"></div>
+      <div class="col-sm-8 col-md-8 col-lg-8">
+
+        {# Schema title #}
+        <div class="form-floating">
+          {{ form.title }}
+          <label for="{{ form.title.label }}">{{ form.title.label }}</label>
+          {% for error in form.title.errors %}
+            <p class="mt-3 text-danger">{{ error }}</p>
+          {% endfor %}
+        </div>
+
+        {# Schema extra parameters #}
+        <div class="row">
+
+          {# Schema column separator #}
+          <div class="col-sm-5 col-md-5 col-lg-5">
+            <div class="form-floating">
+              {{ form.separator }}
+              <label for="{{ form.separator.label }}">{{ form.separator.label }}</label>
+              {% for error in form.separator.errors %}
+                <p class="mt-3 text-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="col-sm-1 col-md-1 col-lg-1"></div>
+          <div class="col-sm-1 col-md-1 col-lg-1"></div>
+
+          {# Schema string quotes #}
+          <div class="col-sm-5 col-md-5 col-lg-5">
+            <div class="form-floating">
+              {{ form.quotes }}
+              <label for="{{ form.quotes.label }}">{{ form.quotes.label }}</label>
+              {% for error in form.quotes.errors %}
+                <p class="mt-3 text-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        {# Column parameters #}
+        <div class="row text-center mt-3">
+          <h3>Column parameters</h3>
+
+          {{ column_formset.management_form }}
+          {% for form in column_formset %}
+            <div class="column-form">
+              {% include 'fake_schemas_generation/_column_form.html' %}
+              {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+              {% endfor %}
+            </div>
+          {% endfor %}
+
+        </div>
+
+      </div>
+      <div class="col-sm-2 col-md-2 col-lg-2"></div>
+    </div>
+
+  </form>
+
+{% endblock %}
