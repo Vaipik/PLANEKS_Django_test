@@ -49,7 +49,7 @@ class Schema(models.Model):
 
     class Meta:
         db_table = "user_schemas"
-        ordering = ["title", "-edited_at"]
+        ordering = ["-edited_at", "title"]
         verbose_name = "Schema"
         verbose_name_plural = "Schemas"
         unique_together = ["title", "user"]

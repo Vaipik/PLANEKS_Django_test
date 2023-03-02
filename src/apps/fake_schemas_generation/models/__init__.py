@@ -1,7 +1,9 @@
-from .record import Record
+from .column import Column
+from .data_set import DataSet
 from .schema import Schema
 
 __all__ = (
-    "Record", Record,
+    "Column", Column,
     "Schema", Schema,
+    "DataSet", DataSet,
 )

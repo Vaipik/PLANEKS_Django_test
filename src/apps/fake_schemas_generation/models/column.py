@@ -6,8 +6,8 @@ from utils.data_types import RECORD_DATA_TYPES
 from ..libs import constants
 
 
-class Record(models.Model):
-    """DB Table for storing record data: header, data type, data"""
+class Column(models.Model):
+    """DB Table for storing column data: header, data type, data"""
     id = models.UUIDField(
         default=uuid4,
         primary_key=True,
@@ -35,22 +35,22 @@ class Record(models.Model):
     type = models.CharField(
         max_length=constants.COLUMN_TYPE_LENGTH,
         choices=RECORD_DATA_TYPES,
-        verbose_name="Record data type",
+        verbose_name="Column data type",
         default=""
     )
     order = models.PositiveSmallIntegerField()
     schema = models.ForeignKey(
         to="fake_schemas_generation.Schema",
         on_delete=models.CASCADE,
-        related_name="record"
+        related_name="column"
     )
 
     class Meta:
-        db_table = "schema_records"
+        db_table = "schema_columns"
         ordering = ["schema", "order"]
         verbose_name = "Record data"
         verbose_name_plural = "Records data"
-        unique_together = ["header", "schema", "order"]
+        unique_together = ["schema", "order"]
 
     def __str__(self) -> str:
         return f"{self.schema} | {self.header} | {self.get_type_display()} | {self.data[:30]}"
