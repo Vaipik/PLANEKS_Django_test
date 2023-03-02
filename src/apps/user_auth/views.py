@@ -15,7 +15,7 @@ class SignUpView(generic.CreateView):
 
     def get_success_url(self):
         login(self.request, self.object)  # self.object -> created user
-        return reverse_lazy("fake_schemas_generation:user_schemas")
+        return reverse_lazy("fake_schemas_generation:user_schemas_list")
 
 
 class SignInView(View):
@@ -31,7 +31,7 @@ class SignInView(View):
                     data={
                         "message": "Logged in",
                         "status": 200,
-                        "url": redirect("fake_schemas_generation:user_schemas").url
+                        "url": redirect("fake_schemas_generation:user_schemas_list").url
                     },
                     status=200
                 )
