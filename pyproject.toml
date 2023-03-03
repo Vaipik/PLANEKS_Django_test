@@ -15,6 +15,8 @@ django-autoslug = "^1.9.8"
 pytils = "^0.4.1"
 django-storages = "^1.13.2"
 dropbox = "^11.36.0"
+gunicorn = "^20.1.0"
+whitenoise = "^6.4.0"
 
 
 [tool.poetry.group.dev.dependencies]
