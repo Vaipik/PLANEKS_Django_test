@@ -24,9 +24,8 @@ class CreateDataSet(LoginRequiredMixin, View):
 class GenerateCSV(LoginRequiredMixin, View):
 
     def post(self, request, dataset_id):
-
         dataset = services.get_dataset(dataset_id)
-        # services.generate_csv(dataset)
+        services.generate_csv(dataset)
 
         return JsonResponse(
             data={

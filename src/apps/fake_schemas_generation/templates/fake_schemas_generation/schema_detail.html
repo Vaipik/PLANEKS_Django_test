@@ -49,7 +49,8 @@
             <div class="col-sm-3 col-md-3 col-lg-3"><h4 class="fw-light mb-4">Datasets</h4></div>
 
             <div class="col-sm-9 col-md-9 col-lg-9">
-              <form method="post" action="{% url 'fake_schemas_generation:add_dataset' schema_url=schema.slug %}">
+              <form method="post" action="{% url 'fake_schemas_generation:add_dataset' schema_url=schema.slug %}"
+              id="form_dataset">
                 <div class="row">
                   <div class="col-sm-6 col-md-6 col-lg-6">
                     <div class="form-floating">
@@ -90,10 +91,11 @@
 
                 </td>
                 <td>
-                  <div class="badge bg-success dataset{{ forloop.counter }} text-white  fw-light">
                     {% if dataset.is_uploaded %}
+                  <div class="badge bg-success dataset{{ forloop.counter }} text-black  fw-light">
                       Generated
                     {% else %}
+                  <div class="badge bg-warning dataset{{ forloop.counter }} text-black  fw-light">
                       Not generated
                     {% endif %}
                   </div>
@@ -102,7 +104,7 @@
                   <div class="row">
                     {% if dataset.is_uploaded %}
                       <div class="col-sm-6 col-md-6 col-l-6">
-                        <a href="{{ dataset.csv_file.url }}">Download</a>
+                        <a href="{{ dataset.csv_file.url }}" class="btn btn-outline-success">Download</a>
                       </div>
                       <div class="col-sm-6 col-md-6 col-l-6">
                         <a href="#">

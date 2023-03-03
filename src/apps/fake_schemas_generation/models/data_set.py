@@ -13,8 +13,8 @@ class DataSet(models.Model):
         editable=False
     )
     csv_file = models.FileField(upload_to=_get_folder_name)
-    rows_quantity = models.PositiveSmallIntegerField()
-    generated_at = models.DateField(auto_now_add=True)
+    rows_quantity = models.IntegerField()
+    generated_at = models.DateTimeField(auto_now_add=True)
     is_uploaded = models.BooleanField(default=False)
     schema = models.ForeignKey(
         to="fake_schemas_generation.Schema",
@@ -26,7 +26,7 @@ class DataSet(models.Model):
         db_table = "generated_csvs"
         verbose_name = "Dataset"
         verbose_name_plural = "Datasets"
-        ordering = ["-generated_at", "is_uploaded", "id"]
+        ordering = ["generated_at"]
 
     def __str__(self):
         return f"{self.schema} | {self.rows_quantity} {self.pk}"
