@@ -5,7 +5,6 @@ from ..factories import UserFactory
 
 
 class SignOutTest(TestCase):
-
     @classmethod
     def setUpTestData(cls):
         cls.logout_url = reverse("user_auth:logout")
@@ -37,4 +36,6 @@ class SignOutTest(TestCase):
         self.client.login(**self.credentials)
         response = self.client.post(self.logout_url)
 
-        self.assertEqual(response.status_code, 302)  # success logout and redirect to sign up
+        self.assertEqual(
+            response.status_code, 302
+        )  # success logout and redirect to sign up

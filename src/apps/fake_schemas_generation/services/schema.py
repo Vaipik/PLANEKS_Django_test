@@ -20,5 +20,3 @@ def get_user_schema(user: User, schema_url: str) -> Schema:
     :param schema_url: sdssss
     """
     return Schema.objects.prefetch_related("column").get(user=user, slug=schema_url)
-
-

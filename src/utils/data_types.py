@@ -25,10 +25,7 @@ COLUMN_SEPARATOR = (
     (";", "Semicolon (;)"),
 )
 
-STRING_QUOTES = (
-    ('"', 'Double quote (")'),
-    ("'", "Single quote (')")
-)
+STRING_QUOTES = (('"', 'Double quote (")'), ("'", "Single quote (')"))
 
 fake = Faker()
 

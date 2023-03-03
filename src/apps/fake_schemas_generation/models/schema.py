@@ -13,14 +13,14 @@ User = get_user_model()
 
 class Schema(models.Model):
     """"""
+
     id = models.UUIDField(
         default=uuid4,
         primary_key=True,
         editable=False,
     )
     title = models.CharField(
-        max_length=constants.SCHEMA_TITLE_MAX_LENGTH,
-        verbose_name="Schema title"
+        max_length=constants.SCHEMA_TITLE_MAX_LENGTH, verbose_name="Schema title"
     )
     separator = models.CharField(
         max_length=constants.COLUMN_SEPARATOR_LENGTH,
@@ -35,17 +35,10 @@ class Schema(models.Model):
     slug = AutoSlugField(
         max_length=constants.SCHEMA_URL_MAX_LENGTH,
         populate_from="title",
-        unique_with="user"
+        unique_with="user",
     )
-    edited_at = models.DateTimeField(
-        auto_now=True,
-        verbose_name="Edited"
-    )
-    user = models.ForeignKey(
-        to=User,
-        on_delete=models.CASCADE,
-        related_name="schema"
-    )
+    edited_at = models.DateTimeField(auto_now=True, verbose_name="Edited")
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="schema")
 
     class Meta:
         db_table = "user_schemas"

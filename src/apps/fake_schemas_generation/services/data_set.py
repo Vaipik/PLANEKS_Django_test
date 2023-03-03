@@ -46,7 +46,7 @@ def generate_csv(dataset: DataSet):
     for _ in range(dataset.rows_quantity):
         csv_writer.writerow(generate_row(schema_columns))
 
-    csv_file = ContentFile(csv_buffer.getvalue().encode('utf-8'))
+    csv_file = ContentFile(csv_buffer.getvalue().encode("utf-8"))
 
     dataset.csv_file.save("test.csv", csv_file)
     dataset.is_uploaded = True

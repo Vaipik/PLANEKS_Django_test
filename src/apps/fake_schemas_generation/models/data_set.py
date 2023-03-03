@@ -7,14 +7,13 @@ from utils.data_set import _get_folder_name
 
 class DataSet(models.Model):
     """Is used to store generated datasets"""
-    id = models.UUIDField(
-        default=uuid4,
-        primary_key=True,
-        editable=False
-    )
+
+    id = models.UUIDField(default=uuid4, primary_key=True, editable=False)
     csv_file = models.FileField(upload_to=_get_folder_name)
     rows_quantity = models.IntegerField()
-    generated_at = models.DateTimeField(auto_now_add=True)  # Date when DS has been created
+    generated_at = models.DateTimeField(
+        auto_now_add=True
+    )  # Date when DS has been created
     is_uploaded = models.BooleanField(default=False)
     schema = models.ForeignKey(
         to="fake_schemas_generation.Schema",

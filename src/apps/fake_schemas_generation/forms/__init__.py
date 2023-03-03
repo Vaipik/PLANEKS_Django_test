@@ -3,7 +3,10 @@ from .schema import SchemaForm, ColumnFormSet
 
 
 __all__ = (
-    "ColumnForm", ColumnForm,
-    "ColumnFormSet", ColumnFormSet,
-    "SchemaForm", SchemaForm
+    "ColumnForm",
+    ColumnForm,
+    "ColumnFormSet",
+    ColumnFormSet,
+    "SchemaForm",
+    SchemaForm,
 )

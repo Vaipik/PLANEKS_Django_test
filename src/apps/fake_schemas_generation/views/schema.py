@@ -2,21 +2,17 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
 from django.views import generic, View
 
 from utils.pagination import PaginationMixin
-from .. import forms, services, models
+from .. import forms, services
 
 
 class CreateUserSchema(LoginRequiredMixin, View):
     """View for creating new user schema with form and inline formset"""
 
     def get(self, request):
-        context = {
-            "form": forms.SchemaForm(),
-            "column_formset": forms.ColumnFormSet()
-        }
+        context = {"form": forms.SchemaForm(), "column_formset": forms.ColumnFormSet()}
         return render(request, "fake_schemas_generation/create_schema.html", context)
 
     def post(self, request):
@@ -30,20 +26,24 @@ class CreateUserSchema(LoginRequiredMixin, View):
                 schema = form.save(commit=False)
                 schema.user = request.user
                 formset = forms.ColumnFormSet(form_data, instance=schema)
-                print(formset.errors)
                 if formset.is_valid():
                     schema.save()
                     formset.save()
                     return redirect("fake_schemas_generation:user_schemas_list")
 
-                return render(request, "fake_schemas_generation/create_schema.html",
-                              {"form": form, "column_formset": formset})
+                return render(
+                    request,
+                    "fake_schemas_generation/create_schema.html",
+                    {"form": form, "column_formset": formset},
+                )
         formset = services.get_updated_formset(
-            form_data=form_data,
-            formset=forms.ColumnFormSet,
-            button_data=button
+            form_data=form_data, formset=forms.ColumnFormSet, button_data=button
         )
-        return render(request, "fake_schemas_generation/create_schema.html", {"form": form, "column_formset": formset})
+        return render(
+            request,
+            "fake_schemas_generation/create_schema.html",
+            {"form": form, "column_formset": formset},
+        )
 
 
 class EditUserSchema(LoginRequiredMixin, View):
@@ -53,11 +53,7 @@ class EditUserSchema(LoginRequiredMixin, View):
         schema = services.get_user_schema(request.user, schema_url)
         form = forms.SchemaForm(instance=schema)
         formset = forms.ColumnFormSet(instance=schema)
-        context = {
-            "schema_url": schema_url,
-            "form": form,
-            "column_formset": formset
-        }
+        context = {"schema_url": schema_url, "form": form, "column_formset": formset}
         return render(request, "fake_schemas_generation/edit_schema.html", context)
 
     def post(self, request, schema_url):
@@ -71,9 +67,7 @@ class EditUserSchema(LoginRequiredMixin, View):
             if form.is_valid():
                 schema = form.save(commit=False)
                 schema.user = request.user
-                print(schema)
                 formset = forms.ColumnFormSet(form_data, instance=schema)
-                print(formset.errors)
                 if formset.is_valid():
                     schema.save()
                     formset.save()
@@ -82,11 +76,7 @@ class EditUserSchema(LoginRequiredMixin, View):
                 return render(
                     request,
                     "fake_schemas_generation/edit_schema.html",
-                    {
-                        "schema_url": schema_url,
-                        "form": form,
-                        "column_formset": formset
-                    }
+                    {"schema_url": schema_url, "form": form, "column_formset": formset},
                 )
         formset = services.get_updated_formset(
             form_data=form_data,
@@ -98,16 +88,12 @@ class EditUserSchema(LoginRequiredMixin, View):
         return render(
             request,
             "fake_schemas_generation/edit_schema.html",
-            {
-                "schema_url": schema_url,
-                "form": form,
-                "column_formset": formset
-            }
+            {"schema_url": schema_url, "form": form, "column_formset": formset},
         )
 
 
 class UserSchemasList(LoginRequiredMixin, PaginationMixin, generic.ListView):
-    template_name = 'fake_schemas_generation/schemas_list.html'
+    template_name = "fake_schemas_generation/schemas_list.html"
     context_object_name = "schemas"
     paginate_by = 10
 
@@ -125,6 +111,7 @@ class UserSchemasList(LoginRequiredMixin, PaginationMixin, generic.ListView):
 
 class UserSchema(LoginRequiredMixin, PaginationMixin, generic.ListView):
     """Displaying schema columns and schemas datasets"""
+
     template_name = "fake_schemas_generation/schema_detail.html"
     slug_url_kwarg = "schema_url"
     paginate_by = 4
@@ -139,7 +126,9 @@ class UserSchema(LoginRequiredMixin, PaginationMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        self.schema = services.get_user_schema(self.request.user, schema_url=self.kwargs["schema_url"])
+        self.schema = services.get_user_schema(
+            self.request.user, schema_url=self.kwargs["schema_url"]
+        )
         return services.get_schema_datasets(self.schema)
 
 

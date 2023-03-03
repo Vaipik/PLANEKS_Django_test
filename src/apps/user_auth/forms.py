@@ -13,26 +13,23 @@ class SignUpForm(UserCreationForm):
         min_length=constants.USER_MIN_LEGNTH,
         max_length=constants.USER_MAX_LEGNTH,
         label="Enter username",
-        widget=forms.TextInput(attrs={
-            "class": "form-control mt-3",
-            "placeholder": "username"
-        })
+        widget=forms.TextInput(
+            attrs={"class": "form-control mt-3", "placeholder": "username"}
+        ),
     )
     password1 = forms.CharField(
         max_length=constants.PASSWORD_MAX_LENGTH,
         label="Enter your password",
-        widget=forms.PasswordInput(attrs={
-            "class": "form-control mt-3",
-            "placeholder": "Enter password"
-        })
+        widget=forms.PasswordInput(
+            attrs={"class": "form-control mt-3", "placeholder": "Enter password"}
+        ),
     )
     password2 = forms.CharField(
         max_length=constants.PASSWORD_MAX_LENGTH,
         label="Repeat your password",
-        widget=forms.PasswordInput(attrs={
-            "class": "form-control mt-3",
-            "placeholder": "Repeat password"
-        })
+        widget=forms.PasswordInput(
+            attrs={"class": "form-control mt-3", "placeholder": "Repeat password"}
+        ),
     )
 
     class Meta:
@@ -45,16 +42,20 @@ class SignInForm(AuthenticationForm):
         min_length=constants.USER_MIN_LEGNTH,
         max_length=constants.USER_MAX_LEGNTH,
         label="Enter username",
-        widget=forms.TextInput(attrs={
-            "class": "form-control mt-3",
-            "placeholder": "username",  # required to prettify view of form
-        })
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control mt-3",
+                "placeholder": "username",  # required to prettify view of form
+            }
+        ),
     )
     password = forms.CharField(
         max_length=constants.PASSWORD_MAX_LENGTH,
         label="Enter password",
-        widget=forms.PasswordInput(attrs={
-            "class": "form-control mt-3",
-            "placeholder": "password",  # required to prettify view of form
-        })
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control mt-3",
+                "placeholder": "password",  # required to prettify view of form
+            }
+        ),
     )

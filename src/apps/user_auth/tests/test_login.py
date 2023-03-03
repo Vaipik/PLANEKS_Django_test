@@ -9,7 +9,6 @@ User = get_user_model()
 
 
 class SignInTest(TestCase):
-
     @classmethod
     def setUpTestData(cls):
         cls.sign_in_url = reverse("user_auth:login")
