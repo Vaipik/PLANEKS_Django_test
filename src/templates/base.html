@@ -43,7 +43,7 @@
       <div class="text-end">
         {% if user.is_authenticated %}
           <button type="button" class="btn btn-outline-light me-2"
-                  data-bs-toggle="modal" data-bs-target="#logou_modal">
+                  data-bs-toggle="modal" data-bs-target="#logout_modal">
             Logout
           </button>
         {% else %}
@@ -67,11 +67,38 @@
   {% endblock content %}
 </div>
 
+<nav class="container-fluid align-content-center pb-3">
+  <ul class="pagination d-lg-flex justify-content-center">
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link bg-body-tertiary fw-light text-decoration-none text-dark"
+           href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      </li>
+    {% endif %}
+    {% for page in pages %}
+        <li class="page-item">
+          {% if page == page_obj.number %}
+            <a class="page-link disabled fw-bolder" href="?page={{ page }}">{{ page }}</a>
+          {% else %}
+            <a class="page-link bg-body-tertiary fw-light text-decoration-none text-dark"
+               href="?page={{ page }}">{{ page }}</a>
+        </li>
+      {% endif %}
+
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link bg-body-tertiary fw-light text-decoration-none text-dark"
+                               href="?page={{ page_obj.next_page_number }}">Next</a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+<div class="mb-5"></div>
 <footer class="footer mt-sm-5 mt-md-5 mt-lg-5 py-3 bg-dark fixed-bottom">
   <div class="container text-center">
     <span class="text-white">
       &copy; 2023 Mykyta Khylko
-      <a href="https://github.com/Vaipik/PLANEKS_Django_test/" class="text-muted text-decoration-none fw-lighter"
+      <a href="https://github.com/Vaipik/PLANEKS_Django_test/" class="text-white text-decoration-none fw-lighter"
       >Github
       </a>
     </span>
