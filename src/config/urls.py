@@ -12,7 +12,7 @@ urlpatterns = [
     ),
 ]
 
-handler400 = "exceptions.views.handler_400"
-handler403 = "exceptions.views.handler_403"
-handler404 = "exceptions.views.handler_404"
-handler500 = "exceptions.views.handler_500"
+handler400 = "apps.exceptions.views.handler_400"
+handler403 = "apps.exceptions.views.handler_403"
+handler404 = "apps.exceptions.views.handler_404"
+handler500 = "apps.exceptions.views.handler_500"

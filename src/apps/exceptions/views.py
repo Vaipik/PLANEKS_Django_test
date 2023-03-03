@@ -9,7 +9,7 @@ def handler_403(request, exception):
     return render(request, "exceptions/403.html")
 
 
-def hander_404(request, exception):
+def handler_404(request, exception):
     return render(request, "exceptions/404.html")
 
 
