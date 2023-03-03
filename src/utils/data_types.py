@@ -33,15 +33,14 @@ STRING_QUOTES = (
 fake = Faker()
 
 FAKER = {
-    "First name": fake.first_name,
-    "Last name": fake.last_name,
+    "Full name": fake.name,
     "Job": fake.job,
     "Email": fake.email,
     "Domain name": fake.domain_name,
     "Phone number": fake.phone_number,
     "Company name": fake.company,
     "Text": fake.paragraph,
-    "Integer": random.randrange,
+    "Integer": random.randint,
     "Address": fake.address,
     "Date": fake.date,
 }
