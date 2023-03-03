@@ -1,9 +1,12 @@
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import generic, View
 
 from utils.pagination import PaginationMixin
-from .. import forms, services
+from .. import forms, services, models
 
 
 class CreateUserSchema(LoginRequiredMixin, View):
@@ -138,3 +141,11 @@ class UserSchema(LoginRequiredMixin, PaginationMixin, generic.ListView):
     def get_queryset(self):
         self.schema = services.get_user_schema(self.request.user, schema_url=self.kwargs["schema_url"])
         return services.get_schema_datasets(self.schema)
+
+
+@login_required
+def delete_user_schema(request, schema_url):
+    schema = services.get_user_schema(request.user, schema_url)
+    schema.delete()
+    messages.success(request, "Schema has been deleted successfully")
+    return redirect("fake_schemas_generation:user_schemas_list")

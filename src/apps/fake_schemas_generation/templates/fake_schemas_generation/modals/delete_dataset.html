@@ -1,0 +1,23 @@
+<div class="modal fade" id="delete_file_modal{{ forloop.counter }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Sign in form</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="alert alert-warning d-none" role="alert">
+      </div>
+
+      <form method="POST" action="{% url 'fake_schemas_generation:delete_dataset' dataset_id=dataset.pk%}" id="delete_file{{ forloop.counter }}">
+        <div class="modal-body">
+          Are you sure that you want to delete file ?
+          {% csrf_token %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="delete_button{{ forloop.counter }}">Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

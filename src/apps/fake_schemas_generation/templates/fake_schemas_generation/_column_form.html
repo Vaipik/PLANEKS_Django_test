@@ -64,25 +64,18 @@
       Delete column
     </button>
   </div>
-  <div class="row mt-3 text-end">
-    <div class="col-sm-10 col-md-10 col-lg-10"></div>
-    <div class="col-sm-2 col-md-2 col-lg-2">
-      {% if forloop.last %}
-        <div class="row">
-          {% csrf_token %}
+  {% if forloop.last %}
+    {% csrf_token %}
 
-
-          <div class="col-sm-3 col-md-3 col-lg-3">
-            <button class="btn btn-primary text-st" type="submit" name="button" value="submit">Submit</button>
-          </div>
-          <div class="col-sm-6 col-md-6 col-lg-6"></div>
-          <div class="col-sm-3 col-md-3 col-lg-3">
-            <button class="btn btn-outline-success text-dark mt-4" name="button" value="add">Add column</button>
-          </div>
-
-
-        </div>
-      {% endif %}
+    <div class="row mt-3">
+      <div class="col-sm-1 col-md-1 col-lg-1">
+        <button class="btn btn-primary text-st" type="submit" name="button" value="submit">Submit</button>
+      </div>
+      <div class="col-sm-9 col-md-9 col-lg-9"></div>
+      <div class="col-sm-2 col-md-2 col-lg-2 ">
+        <button class="btn btn-outline-success text-dark ms-5" name="button" value="add">New column</button>
+      </div>
     </div>
-  </div>
-</div>
+
+    </div>
+  {% endif %}

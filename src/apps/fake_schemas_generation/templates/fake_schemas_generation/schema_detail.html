@@ -50,7 +50,7 @@
 
             <div class="col-sm-9 col-md-9 col-lg-9">
               <form method="post" action="{% url 'fake_schemas_generation:add_dataset' schema_url=schema.slug %}"
-              id="form_dataset">
+                    id="form_dataset">
                 <div class="row">
                   <div class="col-sm-6 col-md-6 col-lg-6">
                     <div class="form-floating">
@@ -63,7 +63,7 @@
                   </div>
                   <div class="col-sm-6 col-md-6 col-lg-6">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-success text-white">Add new</button>
+                    <button type="submit" class="btn btn-success text-white mt-3">Add new</button>
                   </div>
                 </div>
               </form>
@@ -75,7 +75,7 @@
             <thead>
             <tr>
               <th scope="col" class="fw-light">#</th>
-              <th scope="col" class="fw-light">Generated at</th>
+              <th scope="col" class="fw-light">Created at</th>
               <th scope="col" class="fw-light">Status</th>
               <th scope="col" class="fw-light">Actions</th>
             </tr>
@@ -91,40 +91,46 @@
 
                 </td>
                 <td>
-                    {% if dataset.is_uploaded %}
-                  <div class="badge bg-success dataset{{ forloop.counter }} text-black  fw-light">
-                      Generated
-                    {% else %}
-                  <div class="badge bg-warning dataset{{ forloop.counter }} text-black  fw-light">
-                      Not generated
-                    {% endif %}
+                  {% if dataset.is_uploaded %}
+                    <div class="badge bg-success dataset{{ forloop.counter }} text-black  fw-light">
+                    Generated
+                  {% else %}
+                    <div class="badge bg-warning dataset{{ forloop.counter }} text-black  fw-light">
+                    Not generated
+                  {% endif %}
                   </div>
                 </td>
                 <td>
                   <div class="row">
                     {% if dataset.is_uploaded %}
                       <div class="col-sm-6 col-md-6 col-l-6">
-                        <a href="{{ dataset.csv_file.url }}" class="btn btn-outline-success">Download</a>
+                        <a href="{{ dataset.csv_file.url }}" class="btn btn-sm btn-outline-success">Download</a>
                       </div>
                       <div class="col-sm-6 col-md-6 col-l-6">
-                        <a href="#">
+                        <button type="button" class="btn btn-sm text-dark btn-outline-danger"
+                                data-bs-toggle="modal" data-bs-target="#delete_file_modal{{ forloop.counter }}"
+                                id="modal_button{{ forloop.counter }}">
                           Delete
-                        </a>
+                        </button>
                       </div>
                     {% else %}
                       <div class="col-sm-3 col-md-3 col-lg-3"></div>
                       <div class="col-sm-6 col-md-6 col-lg-6">
-                      <form action="{% url 'fake_schemas_generation:generate_csv' dataset_id=dataset.pk%}"
-                            id="generate_csv{{ forloop.counter }}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" id="button{{ forloop.counter }}">Generate</button>
-                      </form>
+                        <form action="{% url 'fake_schemas_generation:generate_csv' dataset_id=dataset.pk %}"
+                              id="generate_csv{{ forloop.counter }}" method="post">
+                          {% csrf_token %}
+                          <button type="submit" id="button{{ forloop.counter }}"
+                                  class="btn btn-outline-warning text-dark fw-bold btn-sm">Generate
+                          </button>
+                        </form>
                       </div>
                       <div class="col-sm-3 col-md-3 col-lg-3"></div>
                     {% endif %}
                   </div>
                 </td>
               </tr>
+              {% include 'fake_schemas_generation/modals/delete_dataset.html' %}
+
             {% endfor %}
             </tbody>
           </table>
@@ -136,11 +142,10 @@
     <div class="col-sm-2 col-md-2 col-lg-2"></div>
 
   </div>
-
 {% endblock %}
 
 {% block custom_js %}
-  <script src="{% static 'js/generating.js' %}"></script>
+  <script src="{% static 'js/datasets.js' %}"></script>
 {% endblock %}
 
 
