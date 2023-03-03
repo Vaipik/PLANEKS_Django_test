@@ -37,7 +37,15 @@
                 </td>
 
                 <td>
-                  {{ column.get_type_display }}
+                  {% with column.get_type_display as column_type %}
+                    {% if column_type == "Text" %}
+                      {{ column_type }}({{ column.sentences }} sentences)
+                    {% elif column_type == "Integer"%}
+                      {{ column_type }}(From {{ column.start_integer }} to {{ column.end_integer }})
+                    {% else %}
+                      {{ column_type }}
+                    {% endif %}
+                  {% endwith %}
                 </td>
               </tr>
             {% endfor %}
@@ -74,7 +82,7 @@
           <table class="table table-striped">
             <thead>
             <tr>
-              <th scope="col" class="fw-light">#</th>
+              <th scope="col" class="fw-light">Rows</th>
               <th scope="col" class="fw-light">Created at</th>
               <th scope="col" class="fw-light">Status</th>
               <th scope="col" class="fw-light">Actions</th>
@@ -84,7 +92,7 @@
             {% for dataset in page_obj %}
               <tr>
                 <td>
-                  {{ forloop.counter }} {{ dataset.rows_quantity }}
+                  {{ dataset.rows_quantity }}
                 </td>
                 <td class="align-end">
                   {{ dataset.generated_at|date:"d E, Y" }}
