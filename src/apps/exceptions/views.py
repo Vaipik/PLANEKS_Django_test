@@ -13,5 +13,5 @@ def hander_404(request, exception):
     return render(request, "exceptions/404.html")
 
 
-def handler_500(request, exception):
+def handler_500(request):
     return render(request, "exceptions/500.html")
