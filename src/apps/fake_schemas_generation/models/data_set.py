@@ -14,7 +14,7 @@ class DataSet(models.Model):
     )
     csv_file = models.FileField(upload_to=_get_folder_name)
     rows_quantity = models.IntegerField()
-    generated_at = models.DateTimeField(auto_now_add=True)
+    generated_at = models.DateTimeField(auto_now_add=True)  # Date when DS has been created
     is_uploaded = models.BooleanField(default=False)
     schema = models.ForeignKey(
         to="fake_schemas_generation.Schema",
