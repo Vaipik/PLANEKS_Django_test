@@ -34,4 +34,3 @@ generated CSV file from cloud.
    * If you are using `poetry` run `poetry update`
    * If you are using `venv` run `pip instal -r requirements.txt`
 6. And finally run server
-
