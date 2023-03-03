@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
@@ -10,7 +12,7 @@ urlpatterns = [
             "apps.fake_schemas_generation.urls", namespace="fake_schemas_generation"
         ),
     ),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 handler400 = "apps.exceptions.views.handler_400"
 handler403 = "apps.exceptions.views.handler_403"
