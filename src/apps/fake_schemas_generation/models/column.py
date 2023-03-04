@@ -39,4 +39,4 @@ class Column(models.Model):
         unique_together = ["schema", "order"]
 
     def __str__(self) -> str:
-        return f"{self.schema} | {self.header} | {self.get_type_display()} | {self.data[:30]}"
+        return f"{self.schema} | {self.header} | {self.get_type_display()}"
