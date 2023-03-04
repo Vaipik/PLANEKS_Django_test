@@ -67,6 +67,7 @@
   {% endblock content %}
 </div>
 
+{% if page_obj.has_other_pages %}
 <nav class="container-fluid align-content-center pb-5 sticky-bottom">
   <ul class="pagination d-lg-flex justify-content-center">
     {% if page_obj.has_previous %}
@@ -93,6 +94,8 @@
     {% endif %}
   </ul>
 </nav>
+{% endif %}
+
 <div class="mb-5"></div>
 <footer class="footer mt-sm-5 mt-md-5 mt-lg-5 py-3 bg-dark fixed-bottom">
   <div class="container text-center">
