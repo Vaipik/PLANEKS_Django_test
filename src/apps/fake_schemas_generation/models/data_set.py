@@ -9,12 +9,12 @@ class DataSet(models.Model):
     """Is used to store generated datasets"""
 
     id = models.UUIDField(default=uuid4, primary_key=True, editable=False)
-    csv_file = models.FileField(upload_to=_get_folder_name)
+    csv_file = models.FileField(upload_to=_get_folder_name, editable=False)
     rows_quantity = models.IntegerField()
     generated_at = models.DateTimeField(
         auto_now_add=True
     )  # Date when DS has been created
-    is_uploaded = models.BooleanField(default=False)
+    is_uploaded = models.BooleanField(default=False, editable=False)
     schema = models.ForeignKey(
         to="fake_schemas_generation.Schema",
         on_delete=models.CASCADE,
