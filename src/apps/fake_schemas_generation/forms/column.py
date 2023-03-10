@@ -107,7 +107,7 @@ class BaseColumnFormSet(BaseInlineFormSet):
                     if end_integer is None:
                         form.add_error("end_integer", "Enter a number")
                     if start_integer and end_integer:
-                        if start_integer < end_integer:
+                        if start_integer > end_integer:
                             form.add_error("start_integer", "Can't be less than To")
 
                 if column_type == "t":  # Text field
